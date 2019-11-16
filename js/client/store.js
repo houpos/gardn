@@ -22,7 +22,7 @@ import axios from 'axios'
        require('./res/pet_dog1/Diffuse.png'),
        require('./res/pet_dog1/Specular.png')
      ],
-     position: [-0.5, 0.5, -1],
+     position: [0, 0.5, 0],
      scale: [0.2, 0.2, 0.2],
      type: 'OBJ'
    },
@@ -36,7 +36,7 @@ import axios from 'axios'
        require('./res/plant_bush1/bush02.png'),
        require('./res/plant_bush1/bush03.png')
      ],
-     position: [-0.5, 0.5, -1],
+     position: [0, 0.5, 0],
      scale: [0.2, 0.2, 0.2],
      type: 'OBJ'
    },
@@ -49,7 +49,7 @@ import axios from 'axios'
        require('./res/furniture_chair1/Pillow.jpg'),
        require('./res/furniture_chair1/Wood.jpg')
      ],
-     position: [-0.5, 0.5, -1],
+     position: [0, 0.5, 0],
      scale: [0.2, 0.2, 0.2],
      type: 'OBJ'
    },
@@ -62,7 +62,7 @@ import axios from 'axios'
        './res/emoji_smile/emoji_smile_normal.png',
        './res/emoji_smile/emoji_smile_specular.png'
      ],
-     position: [-0.5, 0.5, -1],
+     position: [0, 0.5, 0],
      scale: [0.2, 0.2, 0.2],
      type: 'VRX'
    }
