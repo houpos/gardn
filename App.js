@@ -10,6 +10,8 @@
 import React, { Component } from 'react'
 import ExperienceSelectorScene from './js/components/GardenSetUp'
 import Login from './js/components/Login'
+import { Provider } from 'react-redux'
+import store from './js/store/store.js'
 
 const UNSET = 'UNSET'
 const AR_NAVIGATOR_TYPE = 'AR'
@@ -27,13 +29,17 @@ export default class App extends Component {
 
   render() {
     //Check if user is logged in here
-    if (this.state.navigatorType === UNSET) {
-      return <Login />
-    } else if (this.state.navigatorType === AR_NAVIGATOR_TYPE) {
-      return <ExperienceSelectorScene />
-    } else {
-      this.exitViro()
-    }
+    // if (this.state.navigatorType === UNSET) {
+    //   return <Login />
+    // } else if (this.state.navigatorType === AR_NAVIGATOR_TYPE) {
+      return (
+        <Provider store={store}>
+          <ExperienceSelectorScene />
+        </Provider>
+      )
+    // } else {
+    //   this.exitViro()
+    // }
   }
 
   // This function "exits" Viro by setting the navigatorType to UNSET.

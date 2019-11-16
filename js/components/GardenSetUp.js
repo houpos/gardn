@@ -1,38 +1,10 @@
 import React from 'react'
 import { View, TouchableHighlight, StyleSheet, Text } from 'react-native'
-import { ViroARSceneNavigator } from 'react-viro'
+import GardenARWrapper from './GardenARWrapper'
 
 const AR_NAVIGATOR = 'AR_NAVIGATOR'
 const GARDEN_SELECTOR = 'GARDEN_SELECTOR'
 const defaultNavigatorType = GARDEN_SELECTOR
-const gardenAR = require('./GardenAR')
-
-/*
- AS OF OCTOBER 2019, THIS IS NO LONGER NEEDED
- */
-var sharedProps = {
-  apiKey: 'API_KEY_HERE'
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  gardenSelector: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    width: '95%'
-  },
-  item: {
-    width: 50,
-    height: 50,
-    backgroundColor: '#B0EBBD'
-  }
-})
 
 var localStyles = StyleSheet.create({
   container: {
@@ -84,23 +56,13 @@ export default class GardenSetUpScene extends React.Component {
       navigatorType: defaultNavigatorType
     }
     this.selectGardenSetUp = this.selectGardenSetUp.bind(this)
-    this.navigateAR = this.navigateAR.bind(this)
   }
   selectGardenSetUp(navigatorType) {
     return () => {
       this.setState({
-        navigatorType: navigatorType,
-        sharedProps: sharedProps
+        navigatorType: navigatorType
       })
     }
-  }
-  navigateAR() {
-    return (
-      <ViroARSceneNavigator
-        {...this.state.sharedProps}
-        initialScene={{ scene: gardenAR }}
-      />
-    )
   }
   render() {
     if (this.state.navigatorType === GARDEN_SELECTOR) {
@@ -126,7 +88,7 @@ export default class GardenSetUpScene extends React.Component {
         </View>
       )
     } else if (this.state.navigatorType === AR_NAVIGATOR) {
-      return this.navigateAR()
+      return <GardenARWrapper />
     }
   }
 }
