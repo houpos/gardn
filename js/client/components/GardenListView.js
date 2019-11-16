@@ -26,7 +26,7 @@ import {
 // import renderIf from '../helpers/renderIf';
 import ListViewItem from './GardenListViewItem'
 import { connect } from 'react-redux'
-import { gotModelNames } from '../store/store.js'
+import { gotModelNames } from '../store.js'
 
 /**
  * ListView wrapper that encapsulates behavior for the Listview seen at the bottom of the screen
@@ -36,6 +36,7 @@ import { gotModelNames } from '../store/store.js'
 class DisconnectedGardenListView extends Component {
   constructor(props) {
     super(props)
+    console.log('PROPS', this.props)
     this._renderListItem = this._renderListItem.bind(this)
     this._onAnimationDone = this._onAnimationDone.bind(this)
     this._onListItemPressed = this._onListItemPressed.bind(this)
@@ -72,7 +73,6 @@ class DisconnectedGardenListView extends Component {
   }
 
   _onListItemPressed(rowId) {
-    console.log('LIST ITEM PRESSED IN GARDENLISTVIEW', rowId)
     let selectedItem =  this.state.selectedItem;
 
     return () => {
@@ -85,6 +85,7 @@ class DisconnectedGardenListView extends Component {
   }
 
   render() {
+    console.log('DATA SOURCE', this.state.dataSource)
     if (this.state.dataSource === undefined) {
       return <View />
     }
@@ -119,17 +120,6 @@ class DisconnectedGardenListView extends Component {
   }
 }
 
-// GardenItemListView.propTypes = {
-//   items: PropTypes.array,
-//   onPress: PropTypes.func,
-// };
-
-// function selectProps(store) {
-//   return {
-//     listMode: store.ui.listMode,
-//     currentSelectedEffect: store.ui.currentEffectSelectionIndex,
-//   }
-// }
 var styles = StyleSheet.create({
   listViewContainer: {
     height: 72
