@@ -26,23 +26,24 @@ class DisconnectedGardenAR extends Component {
   constructor() {
     super()
     this.state = {
-      text: 'Initializing AR...'
+      text: 'Initializing AR...',
+      models: []
     }
-    this.onInitialized = this.onInitialized.bind(this)
+    // this.onInitialized = this.onInitialized.bind(this)
     this.renderModels = this.renderModels.bind(this)
   }
   componentDidMount() {
-    this.props.getAllModels()
+    // this.props.getAllModels()
   }
-  onInitialized(state, reason) {
-    if (state === ViroConstants.TRACKING_NORMAL) {
-      this.setState({
-        text: 'Hello World!'
-      })
-    } else if (state === ViroConstants.TRACKING_NONE) {
-      // Handle loss of tracking
-    }
-  }
+  // onInitialized(state, reason) {
+  //   if (state === ViroConstants.TRACKING_NORMAL) {
+  //     this.setState({
+  //       text: 'Hello World!'
+  //     })
+  //   } else if (state === ViroConstants.TRACKING_NONE) {
+  //     // Handle loss of tracking
+  //   }
+  // }
   renderModels(item) {
     console.log('RENDER MODELS', item)
     const models = item
@@ -57,13 +58,8 @@ class DisconnectedGardenAR extends Component {
               key={index}
               source={model.source}
               resouces={[...model.resources]}
-              // resources={[
-              //   require('../res/emoji_smile/emoji_smile_diffuse.png'),
-              //   require('../res/emoji_smile/emoji_smile_normal.png'),
-              //   require('../res/emoji_smile/emoji_smile_specular.png')
-              // ]}
-              position={[-0.5, 0.5, index]}
-              scale={[0.2, 0.2, 0.2]}
+              position={model.position}
+              scale={model.scale}
               type={model.type}
             />
           )
@@ -72,8 +68,7 @@ class DisconnectedGardenAR extends Component {
     )
   }
   render() {
-    console.log('STATE MODELS', this.props.models)
-    const models = this.props.models
+    const models = (this.props.models) ? this.props.models : this.state.models
     return (
       <ViroARScene>
         <ViroText
