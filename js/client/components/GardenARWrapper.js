@@ -10,12 +10,7 @@ import {
 import GardenListView from './GardenListView'
 import GardenAR from './GardenAR'
 import { connect } from 'react-redux'
-import {
-  addedModel,
-  getModels,
-  initialize,
-  gotModelNames
-} from '../store.js'
+import { addModel, gotModelNames } from '../store.js'
 
 /*
  AS OF OCTOBER 2019, THIS IS NO LONGER NEEDED
@@ -65,15 +60,12 @@ class DisconnectedGardenARWrapper extends React.Component {
     this.onListPressed = this.onListPressed.bind(this)
   }
   componentDidMount() {
-    this.props.getAllModels()
     this.props.getModelNames()
   }
   onListPressed(index) {
-    console.log('MADE IT TO ONLISTPRESSED', index)
     this.props.addModel(index)
   }
   render() {
-    console.log('MODELS', this.props.modelNames)
     return (
       <View style={styles.flex}>
         <ViroARSceneNavigator
@@ -93,17 +85,14 @@ class DisconnectedGardenARWrapper extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log('state', state)
   return {
-    models: state.allModels,
     modelNames: state.modelNames
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   getModelNames: () => dispatch(gotModelNames()),
-  getAllModels: () => dispatch(getModels()),
-  addModel: model => dispatch(addedModel(model))
+  addModel: model => dispatch(addModel(model))
 })
 
 const GardenARWrapper = connect(mapStateToProps, mapDispatchToProps)(DisconnectedGardenARWrapper)

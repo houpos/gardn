@@ -11,7 +11,7 @@ const bodyParser = require('body-parser')
 //   require('../secrets') // this will mutate the process.env object with your secrets.
 // }
 
-const passport = require('passport')
+// const passport = require('passport')
 
 // logging middleware https://www.npmjs.com/package/morgan
 app.use(morgan('dev'))
@@ -29,49 +29,49 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // we will need our sequelize instance from somewhere
 const db = require('./db/index')
 // we should do this in the same place we've set up express-session
-const session = require('express-session')
+// const session = require('express-session')
 
 // configure and create our database store
-const SequelizeStore = require('connect-session-sequelize')(session.Store)
-const dbStore = new SequelizeStore({ db: db })
+// const SequelizeStore = require('connect-session-sequelize')(session.Store)
+// const dbStore = new SequelizeStore({ db: db })
 
 // sync so that our session table gets created
-dbStore.sync()
+// dbStore.sync()
 /**************************************/
 
 // Session middleware
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET || 'Gardening is fun',
-    resave: false,
-    store: dbStore,
-    saveUninitialized: false
-  })
-)
+// app.use(
+//   session({
+//     secret: process.env.SESSION_SECRET || 'Gardening is fun',
+//     resave: false,
+//     store: dbStore,
+//     saveUninitialized: false
+//   })
+// )
 
-app.use((req, res, next) => {
-  console.log('SESSION', req.sessionID)
-  next()
-})
+// app.use((req, res, next) => {
+//   // console.log('SESSION', req.sessionID)
+//   next()
+// })
 
 // static middleware https://expressjs.com/en/starter/static-files.html
-app.use(express.static(path.join(__dirname, '..', 'public')))
+// app.use(express.static(path.join(__dirname, '..', 'public')))
 
 // OAuth Passport Middleware HERE!! Must come after session middleware
 // This middleware will consume our req.session object, and attach the user to the request object.
-app.use(passport.initialize())
-app.use(passport.session())
+// app.use(passport.initialize())
+// app.use(passport.session())
 
 // authentication router
-app.use('/auth', require('./routes/auth'))
+// app.use('/auth', require('./routes/auth'))
 
 // Separating out our API routes
-// app.use('/api', require('./routes/api'))
+app.use('/api', require('./routes/api'))
 
 // NEEDS TO BE LAST ROUTE. Catch any paths that don't match above and send back homepage
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'))
-})
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'))
+// })
 
 // Server issues. MUST BE LAST
 app.use((error, req, res, next) => {

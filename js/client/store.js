@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux'
 import { createLogger } from 'redux-logger' // https://github.com/evgenyrodionov/redux-logger
 import thunkMiddleware from 'redux-thunk' // https://github.com/gaearon/redux-thunk
+import axios from 'axios'
 
  const arrOfModels = [
    //  {
@@ -94,23 +95,17 @@ const initialState = {
 }
 
 // ACTION TYPES
-const INITIALIZE_MODELS = 'INITIALIZE_MODELS'
 const ADD_MODEL = 'ADD_MODEL'
 const GET_MODELS = 'GET_MODELS'
 const GET_MODEL_NAMES = 'GET_MODEL_NAMES'
 
 // ACTION CREATORS
-export const initialize = () => ({
-  type: GET_MODELS,
-  allModels: []
-})
-
 const gotModels = allModels => ({
   type: GET_MODELS,
   allModels
 })
 
-export const addedModel = model => ({
+export const addModel = model => ({
   type: ADD_MODEL,
   model
 })
@@ -122,10 +117,9 @@ export const gotModelNames = () => ({
 
 // THUNKS
 export const getModels = () => {
-  return dispatch => {
+  return async dispatch => {
     try {
-      // const { data } = await axios.get(`/api/cart/guest`)
-      const data = [...arrOfModels]
+      const data = await [...arrOfModels]
       return dispatch(gotModels(data))
     } catch (error) {
       console.error(error)
@@ -135,27 +129,12 @@ export const getModels = () => {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case INITIALIZE_MODELS:
-      return {...state, allModels: action.allModels}
     case GET_MODELS:
       return {...state, allModels: action.allModels}
     case GET_MODEL_NAMES:
       return {...state, modelNames: action.modelNames}
     case ADD_MODEL:
-      const newModel = {
-        title: 'Smiley',
-        source: require('./res/emoji_smile/emoji_smile.vrx'),
-        thumbnail: require('./res/placeholder-square.jpg'),
-        resources: [
-          './res/emoji_smile/emoji_smile_diffuse.png',
-          './res/emoji_smile/emoji_smile_normal.png',
-          './res/emoji_smile/emoji_smile_specular.png'
-        ],
-        position: [-0.5, 0.5, -1],
-        scale: [0.2, 0.2, 0.2],
-        type: 'VRX'
-      }
-      return { ...state, allModels: [...state.allModels, newModel] }
+      return { ...state, allModels: [...state.allModels, arrOfModels[action.model]] }
     default:
       return state
   }
