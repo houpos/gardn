@@ -10,7 +10,12 @@ import {
 import GardenListView from './GardenListView'
 import GardenAR from './GardenAR'
 import { connect } from 'react-redux'
-import { addedModel, getModels, initialize } from '../store/store.js'
+import {
+  addedModel,
+  getModels,
+  initialize,
+  gotModelNames
+} from '../store.js'
 
 /*
  AS OF OCTOBER 2019, THIS IS NO LONGER NEEDED
@@ -58,17 +63,17 @@ class DisconnectedGardenARWrapper extends React.Component {
       sharedProps: sharedProps
     }
     this.onListPressed = this.onListPressed.bind(this)
-    // this.renderModels = this.renderModels.bind(this)
   }
   componentDidMount() {
     this.props.getAllModels()
+    this.props.getModelNames()
   }
   onListPressed(index) {
     console.log('MADE IT TO ONLISTPRESSED', index)
     this.props.addModel(index)
   }
   render() {
-    console.log('MODELS', this.props.models)
+    console.log('MODELS', this.props.modelNames)
     return (
       <View style={styles.flex}>
         <ViroARSceneNavigator
@@ -78,7 +83,7 @@ class DisconnectedGardenARWrapper extends React.Component {
         />
         <View style={styles.listView}>
           <GardenListView
-            items={this.props.models}
+            items={this.props.modelNames}
             onPress={this.onListPressed}
           />
         </View>
@@ -88,12 +93,15 @@ class DisconnectedGardenARWrapper extends React.Component {
 }
 
 const mapStateToProps = state => {
+  console.log('state', state)
   return {
-    models: state.allModels
+    models: state.allModels,
+    modelNames: state.modelNames
   }
 }
 
 const mapDispatchToProps = dispatch => ({
+  getModelNames: () => dispatch(gotModelNames()),
   getAllModels: () => dispatch(getModels()),
   addModel: model => dispatch(addedModel(model))
 })

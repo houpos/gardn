@@ -8,13 +8,13 @@
  */
 
 import React, { Component } from 'react'
-import ExperienceSelectorScene from './js/components/GardenSetUp'
-import Login from './js/components/Login'
+import GardenSetUp from './js/client/components/GardenSetUp'
+// import Login from './js/components/Login'
 import { Provider } from 'react-redux'
-import store from './js/store/store.js'
+import store from './js/client/store.js'
 
 const UNSET = 'UNSET'
-const AR_NAVIGATOR_TYPE = 'AR'
+// const AR_NAVIGATOR_TYPE = 'AR'
 const defaultNavigatorType = UNSET
 
 export default class App extends Component {
@@ -34,7 +34,7 @@ export default class App extends Component {
     // } else if (this.state.navigatorType === AR_NAVIGATOR_TYPE) {
       return (
         <Provider store={store}>
-          <ExperienceSelectorScene />
+          <GardenSetUp />
         </Provider>
       )
     // } else {

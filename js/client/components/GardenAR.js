@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
 import { ViroARScene, ViroNode, ViroText, ViroConstants, Viro3DObject, ViroAmbientLight, ViroSpotLight } from 'react-viro'
-import { getModels } from '../store/store.js'
+import { getModels } from '../store.js'
 import { connect } from 'react-redux'
 
 var styles = StyleSheet.create({
