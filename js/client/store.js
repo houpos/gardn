@@ -86,6 +86,7 @@ const initialState = {
 const ADD_MODEL = 'ADD_MODEL'
 const GET_MODELS = 'GET_MODELS'
 const GET_MODEL_NAMES = 'GET_MODEL_NAMES'
+const DELETE_ALL_MODELS = 'DELETE_ALL_MODELS'
 
 // ACTION CREATORS
 export const getModels = () => ({
@@ -96,6 +97,10 @@ export const getModels = () => ({
 export const addModel = model => ({
   type: ADD_MODEL,
   model
+})
+
+export const deleteAll = () => ({
+  type: DELETE_ALL_MODELS
 })
 
 export const gotModelNames = () => {
@@ -116,6 +121,8 @@ const reducer = (state = initialState, action) => {
       return {...state, modelNames: action.modelNames}
     case ADD_MODEL:
       return { ...state, allModels: [...state.allModels, arrOfModels[action.model]] }
+    case DELETE_ALL_MODELS:
+      return {...state, allModels: []}
     default:
       return state
   }
