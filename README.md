@@ -1,6 +1,6 @@
 # gardn
 
-Created in 2019 by a Grace Hopper students, gardn allows you to use AR to plan your next garden!
+Created in 2019 by a Grace Hopper student, gardn allows you to use AR to plan your next garden!
 
 ## Technolgies
 Javscript, React Native, Redux, Viro Media
