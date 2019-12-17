@@ -18,5 +18,11 @@ npm start
 ```
 ## Screenshots
 
-![launch image](https://github.com/houpos/gardn/blob/master/gardn-1.jpeg)
-![added items to scene](https://github.com/houpos/gardn/blob/master/gardn-2.jpeg)
+![launch image](https://github.com/houpos/gardn/blob/master/app-screenshots/gardn-1.jpeg)
+
+
+![added items to scene](https://github.com/houpos/gardn/blob/master/app-screenshots/gardn-2.jpeg)
+
+## Demo
+
+See video demo here: https://youtu.be/aTRxh9_E1r4
