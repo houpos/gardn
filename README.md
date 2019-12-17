@@ -19,8 +19,6 @@ npm start
 ## Screenshots
 
 ![launch image](https://github.com/houpos/gardn/blob/master/app-screenshots/gardn-1.jpeg)
-
-
 ![added items to scene](https://github.com/houpos/gardn/blob/master/app-screenshots/gardn-2.jpeg)
 
 ## Demo
